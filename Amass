@@ -1,0 +1,81 @@
+## Amass :  Attack Surface Mapping & Asset Discovery tool
+
+- Get the API key sorted :"AlienVault, BinaryEdge, BufferOver, BuiltWith, C99, Censys, Chaos, CIRCL, DNSDB, DNSTable, FacebookCT, GitHub, HackerOne, HackerTarget, NetworksDB, PassiveTotal, RapidDNS, Riddler, SecurityTrails, Shodan, SiteDossier, Spyse, Twitter, Umbrella, URLScan, VirusTotal, WhoisXML, ZETAlytics, Cloudflare"  
+A free one is better than none :p, now after seting up the api key use the code
+
+use
+amass enum -d followhaklukeontwitter.com -config ./myconfigfile.ini
+insted of 
+amass enum -d clicktheclapbutton50timesplz.com
+
+
+Six Functionality offer by  amass tool
+
+- amass intel — Discover targets for enumerations
+- amass enum — Perform enumerations and network mapping
+- amass viz — Visualize enumeration results
+- amass track — Track differences between enumerations
+- amass db — Manipulate the Amass graph database
+- amass dns — Resolve DNS names at high performance
+
+Amass intel :
+
+Reverse Whois : it search the whois database/records, it help to discovering root domain that may be owned by an organization.
+
+
+amass intel -d owasp.org -whois
+
+
+SSL Certificate Grabbing : it pull the ssl certificate from ip range then spits back the domain associated to ssl cert
+
+
+amass intel -active -cidr 173.0.84.0/24
+
+The above cidr range is of paypal.com 
+
+
+ ASNs : An autonomous system number is a unique identifier that is globally available and allows its autonomous system to exchange routing information with other systems.
+
+
+amass intel -org "Tesla"
+after obtaing the asn number from above commond i.e 394161
+amass intel -active -asn 394161
+
+
+
+Now putting all of them together
+amass intel -asn 394161 -whois -d tesla.com
+
+
+Amass enum :
+
+
+amass enum -d example.com
+
+combining the  options
+
+amass enum -d example.com -active -cidr 1.2.3.4/24,4.3.2.1/24 -asn 12344
+
+
+Amass track :
+
+It track changes between the  result of last time same command
+
+
+amass track -d example.com
+
+
+Amass viz : (will update the command)
+
+—
+
+Amass db :
+
+
+For complete list of previous scans
+amass db -show
+
+For specific domain
+amass db -show -d paypal.com
+
+Amass dns : (will update the command)
